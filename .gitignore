@@ -1,3 +1,5 @@
 .DS_Store
 .idea
 eid_tags.txt
+eid_tags_encode.bin
+__pycache__

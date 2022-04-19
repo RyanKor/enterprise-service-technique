@@ -1,8 +1,9 @@
 # vim:fileencoding=utf8
 from __future__ import print_function
-from vb import encode, decode
-from struct import unpack
 import sys
+sys.path.append('/Users/ryan_kim/Documents/programming/enterprise-service-technique/06/main')
+import vb
+from struct import unpack
 import random
 from typing import List, TextIO
 
@@ -10,7 +11,7 @@ from typing import List, TextIO
 def test_vbc():
 
     def test_vb_encode(numbers: List[int], ok: TextIO):
-        bytestream = encode(numbers)
+        bytestream = vb.encode(numbers)
         assert ''.join([format(b, '08b') for b in unpack('%dB' % len(bytestream), bytestream)]) == ok
         print("test ok. %s -> %s" % (numbers, ok))
 
@@ -23,7 +24,10 @@ def test_vbc():
 
     def test_vb_decode():
         n = random.randint(0, sys.maxsize)
-        assert decode(encode([n]))[0] == n
+        assert vb.decode(vb.encode([n]))[0] == n
         print("test ok. %s -> %s" % (n, n))
 
     test_vb_decode()
+
+
+test_vbc()

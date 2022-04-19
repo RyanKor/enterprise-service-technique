@@ -3,7 +3,7 @@ from struct import pack, unpack
 from typing import List, TextIO
 
 
-def encode_number(number: int):
+def encode_number(number: int) -> TextIO:
     """
     VB Code Encode Number method
     :param number:
@@ -17,13 +17,12 @@ def encode_number(number: int):
         byte_lists.insert(0, number % 128)
         if number < 128:
             break
-        number //= number
+        number = number // 128
     byte_lists[-1] += 128
-
     return pack("%dB" % len(byte_lists), *byte_lists)
 
 
-def encode(number: List[int]):
+def encode(number: List[int]) -> TextIO:
     """
     VB Code Encode method
     :param number:
@@ -35,7 +34,7 @@ def encode(number: List[int]):
     return b"".join([encode_number(num) for num in number])
 
 
-def decode(bytestream: TextIO):
+def decode(bytestream: TextIO) -> List[int]:
     """
     VB Code Decode method
     :param bytestream:
