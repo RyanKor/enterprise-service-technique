@@ -8,9 +8,16 @@ for line in f:
     params = [x for x in content.split(",")]
     vb_vals = []
     params_len = 0
+    sum_params = 0
     for p in params:
-        val = vb.encode_number(int(p))
+        p = int(p)
+        p -= sum_params
+        sum_params += p
+        val = vb.encode_number(p)
         params_len += len(val)
         vb_vals.append(val)
         row = "{}{}{}".format(pack('2i', len(title), params_len), title, b''.join(vb_vals))
         outFile.write(bytes(row, encoding="utf8"))
+
+f.close()
+outFile.close()

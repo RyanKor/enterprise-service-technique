@@ -13,3 +13,5 @@ while True:
         print(title)
         for p in vb.decode(f.read(params_len)):
             print(p)
+
+f.close()
